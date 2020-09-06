@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rendering Elements example 1</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/jsx">
+      function formatName(user) {
+        return user.firstName + ' ' + user.lastName;
+      }
+
+      const user = {
+        firstName: 'Dino',
+        lastName: 'Palloncino'
+      }
+
+      const element = <h1>Hi, {formatName(user)}🐶!</h1>;
+
+      ReactDOM.render(element, document.getElementById('root'));
+    </script>
+  </body>
+</html>

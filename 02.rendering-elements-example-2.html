@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rendering Elements example 2</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/jsx">
+      function formatName(pet) {
+        return pet.firstName + ' ' + pet.lastName;
+      }
+
+      const pet = {
+        firstName: 'Dino',
+        lastName: 'Palloncino',
+        imageUrl: 'https://images.unsplash.com/photo-1566903697359-6f8ee1c1ab20?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+      };
+
+      function greeting(pet) {
+        if (pet) {
+          return (
+            <div>
+              <h1>Hi, {formatName(pet)}!</h1>
+              <img src={pet.imageUrl}/>
+            </div>
+          );
+        }
+        return <h1>Hi, random pet!</h1>
+      }
+
+      const element = greeting(pet);
+
+      ReactDOM.render(element, document.getElementById('root'));
+    </script>
+  </body>
+</html>

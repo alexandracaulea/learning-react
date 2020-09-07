@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Handling Events</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="text/jsx">
+      class Toggle extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { isToggleOn: true };
+          this.handleClick = this.handleClick.bind(this);
+        }
+
+        handleClick() {
+          this.setState((prevState) => ({
+            isToggleOn: !prevState.isToggleOn
+          }));
+        }
+
+        render() {
+          return (
+            <button onClick={this.handleClick}>
+              {this.state.isToggleOn ? "ON" : "OFF"}
+            </button>
+          );
+        }
+      }
+
+      function App() {
+        return (
+          <div>
+            <Toggle />
+            <Toggle />
+            <Toggle />
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

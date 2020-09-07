@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Preventing Component Rendering</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="text/jsx">
+      function WarningBanner(props) {
+        if (!props.warn) {
+          return null;
+        }
+        return (
+          <div>
+            <h2>Some warning message!</h2>
+          </div>
+        );
+      }
+
+      class Page extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { showWarning: true };
+          this.handleToggleClick = this.handleToggleClick.bind(this);
+        }
+        handleToggleClick() {
+          this.setState((prevState) => ({
+            showWarning: !prevState.showWarning
+          }));
+        }
+        render() {
+          return (
+            <div>
+              <WarningBanner warn={this.state.showWarning} />
+              <button onClick={this.handleToggleClick}>
+                {this.state.showWarning ? "Show" : "Hide"}
+              </button>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<Page />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Handling Events</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="text/jsx">
+      class LoginControl extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            isLoggedIn: false
+          };
+          this.handleClick = this.handleClick.bind(this);
+        }
+        handleClick() {
+          this.setState((prevState) => ({
+            isLoggedIn: !prevState.isLoggedIn
+          }));
+        }
+        render() {
+          return (
+            <div>
+              <h1>{this.state.isLoggedIn ? "Welcome back!" : "Please sign up."}</h1>
+              <button onClick={this.handleClick}>
+                {this.state.isLoggedIn ? "Logout" : "Login"}
+              </button>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<LoginControl />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Composition vs Inheritance</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+  <script src="https://unpkg.com/react/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/jsx">
+    function Contacts() {
+      return <div className="Contacts">Left</div>;
+    }
+
+    function Chat() {
+      return <div className="Chat">Chat</div>;
+    }
+
+    function SplitPane(props) {
+      return (
+        <div className="SplitPane">
+          <div className="SplitPane-left">{props.left}</div>
+          <div className="SplitPane-right">{props.right}</div>
+        </div>
+      );
+    }
+
+    function App() {
+      return <SplitPane left={<Contacts />} right={<Chat />} />;
+    }
+
+    ReactDOM.render(<App />, document.getElementById("root"));
+  </script>
+</html>

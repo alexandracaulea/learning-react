@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lifting State Up</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+  <script src="https://unpkg.com/react/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/jsx">
+    function BoilingVerdict(props) {
+      if (props.celsius >= 100) {
+        return <p>The water would boil.</p>;
+      }
+      return <p>The water would not boil.</p>;
+    }
+
+    class Calculator extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          temperature: ""
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+      }
+
+      handleChange(event) {
+        this.setState({ temperature: event.target.value });
+      }
+
+      render() {
+        const temperature = this.state.temperature;
+        return (
+          <fieldset>
+            <legend>Enter temperature in Celsius:</legend>
+            <input value={temperature} onChange={this.handleChange} />
+            <BoilingVerdict celsius={parseFloat(temperature)} />
+          </fieldset>
+        );
+      }
+    }
+
+    ReactDOM.render(<Calculator />, document.getElementById("root"));
+  </script>
+</html>

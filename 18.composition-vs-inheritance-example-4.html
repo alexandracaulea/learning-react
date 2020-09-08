@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Composition vs Inheritance</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+  <script src="https://unpkg.com/react/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/jsx">
+    function FancyBorder(props) {
+      return <div>{props.children}</div>;
+    }
+
+    function Popup(props) {
+      return (
+        <FancyBorder>
+          <h1>{props.title}</h1>
+          <p>{props.message}</p>
+          {props.children}
+        </FancyBorder>
+      );
+    }
+
+    class SignUpPopup extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          name: ""
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSignUp = this.handleSignUp.bind(this);
+      }
+
+      handleChange(event) {
+        this.setState({ name: event.target.value });
+      }
+
+      handleSignUp() {
+        console.log(
+          `Welcome to our daily newsletter, ${this.state.name}! We hope you will learn a lot with us.`
+        );
+      }
+
+      render() {
+        return (
+          <Popup
+            title="Sign up to receive our newsletter"
+            message="How should we refer to you?"
+          >
+            <input value={this.state.name} onChange={this.handleChange} />
+            <button onClick={this.handleSignUp}>Sign Me Up!</button>
+          </Popup>
+        );
+      }
+    }
+
+    ReactDOM.render(<SignUpPopup />, document.getElementById("root"));
+
+  </script>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Composition vs Inheritance</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+  <script src="https://unpkg.com/react/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/jsx">
+    function FancyBorder(props) {
+      return (
+        <div className={"FancyBorder FancyBorder-" + props.color}>
+          {props.children}
+        </div>
+      );
+    }
+
+    function WelcomeDialog() {
+      return (
+        <FancyBorder color="lightblue">
+          <h1 className="Dialog-title">Welcome</h1>
+          <p className="Dialog-message">Thank you for subscribing</p>
+        </FancyBorder>
+      );
+    }
+
+    ReactDOM.render(<WelcomeDialog />, document.getElementById("root"));
+  </script>
+</html>
